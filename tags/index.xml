@@ -5,7 +5,26 @@
     <link>https://tomfran.github.io/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomfran.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomfran.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>information-retrieval</title>
+      <link>https://tomfran.github.io/tags/information-retrieval/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomfran.github.io/tags/information-retrieval/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://tomfran.github.io/tags/rust/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomfran.github.io/tags/rust/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>database</title>
       <link>https://tomfran.github.io/tags/database/</link>
