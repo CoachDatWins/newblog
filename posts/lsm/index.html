@@ -213,14 +213,14 @@ keep track of a predecessor buffer while descending levels. This way we can corr
 <p>To determine a level, we can toss a coin and keep going until we get heads.
 This would require a lot of random generations, a faster way is to generate a single
 number and use its binary representation as boolean values.</p>
-<pre tabindex="0"><code>private int randomLevel() {
-    int level = 1;
-    long n = rn.nextLong();
-    while (level &lt; levels &amp;&amp; (n &amp; (1L &lt;&lt; level)) != 0)
-        level++;
-    return level;
-}
-</code></pre><h2 id="sstable">SSTable</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">private</span> <span style="font-weight:bold;text-decoration:underline">int</span> <span style="color:#666;font-weight:bold;font-style:italic">randomLevel</span>() {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">int</span> level = 1;
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">long</span> n = rn.nextLong();
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">while</span> (level &lt; levels &amp;&amp; (n &amp; (1L &lt;&lt; level)) != 0)
+</span></span><span style="display:flex;"><span>        level++;
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">return</span> level;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="sstable">SSTable</h2>
 <p>A Sorted String Table is a disk-based structure for sorted immutable data.
 They consist of two main files, one with actual data and another with an index to speed up look-ups.</p>
 <h3 id="indexing-and-look-ups">Indexing and Look-Ups</h3>
