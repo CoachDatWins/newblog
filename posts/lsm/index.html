@@ -8,7 +8,7 @@
 <title>Log-Structured Merge Tree | Francesco Tomaselli</title>
 
 
-<link rel="stylesheet" href="/assets/combined.min.a148a74822f75fded8799f254508328e45b6e023c4b14874f0ea40e04900ad90.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.e94183525d2113c6b646870c7b3939a64347d4b9f8145f83385165763db2c155.css" media="all">
 
 
 
@@ -49,7 +49,13 @@
   
 </head>
 
-<body class="light">
+
+
+
+
+
+
+<body class="auto">
 
   <div class="content">
     <header>
@@ -512,12 +518,44 @@ a given probability distribution of integers.&#160;<a href="#fnref:2" class="foo
 
 </body>
 
+
 <script>
 
-  function toggleTheme() {
-    document.body.classList.toggle('light');
-    document.body.classList.toggle('dark');
+  function isAuto() {
+    return document.body.classList.contains("auto");
   }
+
+  function setTheme() {
+    if (!isAuto()) {
+      return
+    }
+
+    console
+    document.body.classList.remove("auto");
+    let cls = "light";
+
+    console.log
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      cls = "dark";
+    }
+
+    document.body.classList.add(cls);
+
+  }
+
+  function invert() {
+    document.body.classList.toggle("dark");
+    document.body.classList.toggle("light");
+  }
+
+  if (isAuto()) {
+    console.log("Setting invert listener");
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(invert);
+  }
+
+  setTheme();
+
 
 </script>
 
