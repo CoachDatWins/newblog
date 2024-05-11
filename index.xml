@@ -23,11 +23,11 @@
       <description>An LSM Tree overview and Java implementation.</description>
     </item>
     <item>
-      <title>Resume</title>
-      <link>https://example.org/resume/</link>
+      <title>About</title>
+      <link>https://example.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.org/resume/</guid>
-      <description>Experience Satispay Software Engineer 01/2023 - Now&#xA;Spaziodati Software Engineer Intern 02/2020 - 06/2020&#xA;Education University of Milan Master of Science in Computer Science 2020 - 2022&#xA;University of Trento Bachelor of Science in Computer Science 2017 - 2020&#xA;Skills Programming Languages&#xA;Java, Python, Rust&#xA;Technologies PostgreSQL, Git, Linux, AWS, Spring, Docker, Spark&#xA;Topics Distributed systems, Databases, Microservices, Data compression, Information Retrival, Machine learning, Testing, CI/CD</description>
+      <guid>https://example.org/about/</guid>
+      <description>I am currently working at Satispay as a software engineer, while during my studies I was at Spaziodati for some months.&#xA;I studied Computer Science from 2017 to 2022 at the University of Trento and Milan, focusing on Algorithms and Data structures, Databases, Distributed Systems, and Information Retrieval.&#xA;Feel free to have a look at my LinkedIn or Github.</description>
     </item>
   </channel>
 </rss>
