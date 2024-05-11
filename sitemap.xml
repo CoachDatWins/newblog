@@ -5,11 +5,23 @@
     <loc>https://example.org/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://example.org/tags/information-retrieval/</loc>
+    <lastmod>2024-02-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://example.org/posts/</loc>
+    <lastmod>2024-02-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/rust/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://example.org/posts/search-engine/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/database/</loc>
+    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/java/</loc>
+    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://example.org/posts/lsm/</loc>
     <lastmod>2023-11-12T00:00:00+00:00</lastmod>
