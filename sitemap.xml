@@ -17,6 +17,9 @@
     <loc>https://example.org/posts/search-engine/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://example.org/tags/</loc>
+    <lastmod>2024-02-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://example.org/tags/database/</loc>
     <lastmod>2023-11-12T00:00:00+00:00</lastmod>
   </url><url>
@@ -27,5 +30,7 @@
     <lastmod>2023-11-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://example.org/about/</loc>
+  </url><url>
+    <loc>https://example.org/g-1em39pglw2/</loc>
   </url>
 </urlset>
