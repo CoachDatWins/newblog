@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Francesco Tomaselli</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 May 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Probabilistic to-visit Queue</title>
+      <link>https://example.org/posts/prob-queue/</link>
+      <pubDate>Thu, 16 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://example.org/posts/prob-queue/</guid>
+      <description>Storing a set of 1 billion visited URLs in 18mb.</description>
+    </item>
     <item>
       <title>Search Engine in Rust</title>
       <link>https://example.org/posts/search-engine/</link>

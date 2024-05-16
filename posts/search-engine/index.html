@@ -14,7 +14,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.95bd8f25e3a82100ceaab7f49774821700d8d89a2b551df9cd199c4de2d1626f.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.dcb17aac13c80d97ee5796c67fd8fec3916cafa5e465f01fd50310b065d1745b.css" media="all">
 
 
 
@@ -215,15 +215,15 @@ $$</p>
 $$\downarrow$$
 $$\text{so}, \text{mani}, \text{book}, \text{so}, \text{littl}, \text{time}$$</p>
 <p>And here is the code example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// build regex r&#34;[^a-zA-Z0-9\s]+&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// and Porter Stemmer
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">pub</span> <span style="font-weight:bold;text-decoration:underline">fn</span> <span style="color:#666;font-weight:bold;font-style:italic">tokenize_and_stem</span>(&amp;<span style="font-weight:bold;font-style:italic">self</span>, text: <span style="font-weight:bold;text-decoration:underline">&amp;</span><span style="font-weight:bold;text-decoration:underline">str</span>) -&gt; <span style="font-weight:bold;font-style:italic">Vec</span>&lt;<span style="font-weight:bold;font-style:italic">String</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic">self</span>.regex
-</span></span><span style="display:flex;"><span>        .replace_all(text, <span style="color:#666;font-style:italic">&#34; &#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-style:italic">// build regex r&#34;[^a-zA-Z0-9\s]+&#34;
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">// and Porter Stemmer
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">pub</span> <span style="font-weight:bold">fn</span> tokenize_and_stem(&amp;self, text: <span style="">&amp;</span><span style="">str</span>) -&gt; Vec&lt;String&gt; {
+</span></span><span style="display:flex;"><span>    self.regex
+</span></span><span style="display:flex;"><span>        .replace_all(text, <span style="font-style:italic">&#34; &#34;</span>)
 </span></span><span style="display:flex;"><span>        .split_whitespace()
-</span></span><span style="display:flex;"><span>        .map(<span style="font-weight:bold;text-decoration:underline">str</span>::to_lowercase)
-</span></span><span style="display:flex;"><span>        .map(|t| <span style="font-weight:bold;font-style:italic">self</span>.stemmer.stem(&amp;t).to_string())
+</span></span><span style="display:flex;"><span>        .map(<span style="">str</span>::to_lowercase)
+</span></span><span style="display:flex;"><span>        .map(|t| self.stemmer.stem(&amp;t).to_string())
 </span></span><span style="display:flex;"><span>        .collect()
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="answering-queries">Answering queries</h2>
@@ -283,24 +283,24 @@ the function in use here is <a href="https://en.wikipedia.org/wiki/Okapi_BM25">B
 <li>$k_1$ and $b$ are hyperparameters, we used, $1.2$ and $0.75$ respectively.</li>
 </ul>
 <p>Here is the code example</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> <span style="font-weight:bold;text-decoration:underline">mut</span> scores: <span style="color:#666;font-weight:bold;font-style:italic">HashMap</span>&lt;<span style="font-weight:bold;text-decoration:underline">u32</span>, DocumentScore&gt; = HashMap::new();
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold">let</span> <span style="font-weight:bold">mut</span> scores: <span style="font-weight:bold">HashMap</span>&lt;<span style="">u32</span>, DocumentScore&gt; = HashMap::new();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> n = <span style="font-weight:bold;font-style:italic">self</span>.documents.get_num_documents() <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">f64</span>;
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> avgdl = <span style="font-weight:bold;font-style:italic">self</span>.documents.get_avg_doc_len();
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">let</span> n = self.documents.get_num_documents() <span style="font-weight:bold">as</span> <span style="">f64</span>;
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">let</span> avgdl = self.documents.get_avg_doc_len();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">for</span> (id, token) <span style="font-weight:bold;text-decoration:underline">in</span> tokens.iter().enumerate() {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">if</span> <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> <span style="font-weight:bold;font-style:italic">Some</span>(postings) = <span style="font-weight:bold;font-style:italic">self</span>.get_term_postings(token) {
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> nq = <span style="font-weight:bold;font-style:italic">self</span>.vocabulary.get_term_frequency(token).unwrap() <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">f64</span>;
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> idf = ((n - nq + 0.5) / (nq + 0.5) + 1.0).ln();
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">for</span> (id, token) <span style="font-weight:bold">in</span> tokens.iter().enumerate() {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">if</span> <span style="font-weight:bold">let</span> Some(postings) = self.get_term_postings(token) {
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">let</span> nq = self.vocabulary.get_term_frequency(token).unwrap() <span style="font-weight:bold">as</span> <span style="">f64</span>;
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">let</span> idf = ((n - nq + 0.5) / (nq + 0.5) + 1.0).ln();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;text-decoration:underline">for</span> doc_posting <span style="font-weight:bold;text-decoration:underline">in</span> &amp;postings {
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> fq = doc_posting.document_frequency <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">f64</span>;
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> dl = <span style="font-weight:bold;font-style:italic">self</span>.documents.get_doc_len(doc_posting.document_id) <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">f64</span>;
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">for</span> doc_posting <span style="font-weight:bold">in</span> &amp;postings {
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">let</span> fq = doc_posting.document_frequency <span style="font-weight:bold">as</span> <span style="">f64</span>;
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">let</span> dl = self.documents.get_doc_len(doc_posting.document_id) <span style="font-weight:bold">as</span> <span style="">f64</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> bm_score = idf * (fq * (<span style="color:#666;font-weight:bold;font-style:italic">BM25_KL</span> + 1.0))
-</span></span><span style="display:flex;"><span>                / (fq + <span style="color:#666;font-weight:bold;font-style:italic">BM25_KL</span> * (1.0 - <span style="color:#666;font-weight:bold;font-style:italic">BM25_B</span> + <span style="color:#666;font-weight:bold;font-style:italic">BM25_B</span> * (dl / avgdl)));
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">let</span> bm_score = idf * (fq * (BM25_KL + 1.0))
+</span></span><span style="display:flex;"><span>                / (fq + BM25_KL * (1.0 - BM25_B + BM25_B * (dl / avgdl)));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> doc_score = scores.entry(doc_posting.document_id).or_default();
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">let</span> doc_score = scores.entry(doc_posting.document_id).or_default();
 </span></span><span style="display:flex;"><span>            doc_score.tf_idf += bm_score;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
@@ -339,19 +339,19 @@ trigrams <em>hel</em>, <em>ell</em>, and <em>llo</em>. We therefore keep an inde
 in-memory where for every trigram occuring in the vocabulary, we
 have references to terms.</p>
 <p>When we find a tie in edit distance, we prefer higher overall frequency.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">fn</span> <span style="color:#666;font-weight:bold;font-style:italic">get_closest_index</span>(&amp;<span style="font-weight:bold;font-style:italic">self</span>, term: <span style="font-weight:bold;text-decoration:underline">&amp;</span><span style="font-weight:bold;text-decoration:underline">str</span>) -&gt; <span style="font-weight:bold;font-style:italic">Option</span>&lt;<span style="font-weight:bold;text-decoration:underline">usize</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// &#34;hello&#34; -&gt; &#34;hel&#34;, &#34;ell&#34;, &#34;llo&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> candidates = (0..term.len() - 2)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold">fn</span> get_closest_index(&amp;self, term: <span style="">&amp;</span><span style="">str</span>) -&gt; Option&lt;<span style="">usize</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// &#34;hello&#34; -&gt; &#34;hel&#34;, &#34;ell&#34;, &#34;llo&#34;
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    <span style="font-weight:bold">let</span> candidates = (0..term.len() - 2)
 </span></span><span style="display:flex;"><span>        .map(|i| term[i..i + 3].to_string())
-</span></span><span style="display:flex;"><span>        .filter_map(|t| <span style="font-weight:bold;font-style:italic">self</span>.trigram_index.get(&amp;t))
+</span></span><span style="display:flex;"><span>        .filter_map(|t| self.trigram_index.get(&amp;t))
 </span></span><span style="display:flex;"><span>        .flat_map(|v| v.iter());
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// min edit distance, max frequency
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    candidates
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// min edit distance, max frequency
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    candidates
 </span></span><span style="display:flex;"><span>        .min_by_key(|i| {
 </span></span><span style="display:flex;"><span>            (
-</span></span><span style="display:flex;"><span>                <span style="font-weight:bold;font-style:italic">Self</span>::levenshtein_distance(term, &amp;<span style="font-weight:bold;font-style:italic">self</span>.index_to_term[**i]),
-</span></span><span style="display:flex;"><span>                -(<span style="font-weight:bold;font-style:italic">self</span>.frequencies[**i] <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">i32</span>),
+</span></span><span style="display:flex;"><span>                Self::levenshtein_distance(term, &amp;self.index_to_term[**i]),
+</span></span><span style="display:flex;"><span>                -(self.frequencies[**i] <span style="font-weight:bold">as</span> <span style="">i32</span>),
 </span></span><span style="display:flex;"><span>            )
 </span></span><span style="display:flex;"><span>        })
 </span></span><span style="display:flex;"><span>        .copied()
@@ -433,33 +433,33 @@ $$0\;\text{watermelon}\;5\;\text{fall}\;6\;\text{ront}$$</p>
 <p>The project defines a writer and reader to store those codes on disk. Although not trivial to read, the idea is to use a buffered writer and reader to interact with the disk, and a 128-bit long as a temporary buffer on top of it.</p>
 <p>When we want to write a given integer, we first build a binary payload containing its Gamma representation and then append it to the bit buffer via bit manipulation.
 Once the buffer reaches 128 bits, it is flushed to the underlying buffered writer.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">pub</span> <span style="font-weight:bold;text-decoration:underline">fn</span> <span style="color:#666;font-weight:bold;font-style:italic">write_gamma</span>(&amp;<span style="font-weight:bold;text-decoration:underline">mut</span> <span style="font-weight:bold;font-style:italic">self</span>, n: <span style="font-weight:bold;text-decoration:underline">u32</span>) -&gt; <span style="font-weight:bold;text-decoration:underline">u64</span> {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> (gamma, len) = BitsWriter::int_to_gamma(n + 1);
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic">self</span>.write_internal(gamma, len)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="font-weight:bold">pub</span> <span style="font-weight:bold">fn</span> write_gamma(&amp;<span style="font-weight:bold">mut</span> self, n: <span style="">u32</span>) -&gt; <span style="">u64</span> {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">let</span> (gamma, len) = BitsWriter::int_to_gamma(n + 1);
+</span></span><span style="display:flex;"><span>    self.write_internal(gamma, len)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">fn</span> <span style="color:#666;font-weight:bold;font-style:italic">int_to_gamma</span>(n: <span style="font-weight:bold;text-decoration:underline">u32</span>) -&gt; (<span style="font-weight:bold;text-decoration:underline">u128</span>, <span style="font-weight:bold;text-decoration:underline">u32</span>) {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> msb = 31 - n.leading_zeros();
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> unary: <span style="font-weight:bold;text-decoration:underline">u32</span> = 1 &lt;&lt; msb;
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> gamma: <span style="font-weight:bold;text-decoration:underline">u128</span> = (((n ^ unary) <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">u128</span>) &lt;&lt; (msb + 1)) | unary <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">u128</span>;
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">fn</span> int_to_gamma(n: <span style="">u32</span>) -&gt; (<span style="">u128</span>, <span style="">u32</span>) {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">let</span> msb = 31 - n.leading_zeros();
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">let</span> unary: <span style="">u32</span> = 1 &lt;&lt; msb;
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">let</span> gamma: <span style="">u128</span> = (((n ^ unary) <span style="font-weight:bold">as</span> <span style="">u128</span>) &lt;&lt; (msb + 1)) | unary <span style="font-weight:bold">as</span> <span style="">u128</span>;
 </span></span><span style="display:flex;"><span>    (gamma, 2 * msb + 1)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">fn</span> <span style="color:#666;font-weight:bold;font-style:italic">write_internal</span>(&amp;<span style="font-weight:bold;text-decoration:underline">mut</span> <span style="font-weight:bold;font-style:italic">self</span>, payload: <span style="font-weight:bold;text-decoration:underline">u128</span>, len: <span style="font-weight:bold;text-decoration:underline">u32</span>) -&gt; <span style="font-weight:bold;text-decoration:underline">u64</span> {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic;text-decoration:underline">let</span> free = 128 - <span style="font-weight:bold;font-style:italic">self</span>.written;
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic">self</span>.buffer |= payload &lt;&lt; <span style="font-weight:bold;font-style:italic">self</span>.written;
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">fn</span> write_internal(&amp;<span style="font-weight:bold">mut</span> self, payload: <span style="">u128</span>, len: <span style="">u32</span>) -&gt; <span style="">u64</span> {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">let</span> free = 128 - self.written;
+</span></span><span style="display:flex;"><span>    self.buffer |= payload &lt;&lt; self.written;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">if</span> free &gt; len {
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;font-style:italic">self</span>.written += len;
-</span></span><span style="display:flex;"><span>    } <span style="font-weight:bold;text-decoration:underline">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;font-style:italic">self</span>.update_buffer();
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold;text-decoration:underline">if</span> len &gt; free {
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic">self</span>.buffer |= payload &gt;&gt; free;
-</span></span><span style="display:flex;"><span>            <span style="font-weight:bold;font-style:italic">self</span>.written += len - free;
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">if</span> free &gt; len {
+</span></span><span style="display:flex;"><span>        self.written += len;
+</span></span><span style="display:flex;"><span>    } <span style="font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        self.update_buffer();
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">if</span> len &gt; free {
+</span></span><span style="display:flex;"><span>            self.buffer |= payload &gt;&gt; free;
+</span></span><span style="display:flex;"><span>            self.written += len - free;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    len <span style="font-weight:bold;text-decoration:underline">as</span> <span style="font-weight:bold;text-decoration:underline">u64</span>
+</span></span><span style="display:flex;"><span>    len <span style="font-weight:bold">as</span> <span style="">u64</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="web-client">Web client</h2>
 <p>To have a nicer interaction with the engine I made a simple web interface using
@@ -490,6 +490,14 @@ Once the buffer reaches 128 bits, it is flushed to the underlying buffered write
 
     
   </div>
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
 
 </div>
 
