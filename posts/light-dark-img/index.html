@@ -14,7 +14,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.c3083bdd3c19496ed0d975ef00b949dfc1c0a6c9e8ba82b9b74ab94356bc6503.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.18e31153481b80ce597cc75c06fec2f050f09642b99434a866a2cc705c69e995.css" media="all">
 
 
 
@@ -161,7 +161,8 @@
 <h2 id="code">Code</h2>
 <p>Hugo renders images with the logic defined in:</p>
 <pre tabindex="0"><code>/layouts/_default/_markup/render-image.html
-</code></pre><p>We can override it and decide which class to apply to an image based on the final tag:</p>
+</code></pre><p>We can override it and decide which class to apply to an image based on the final tag.
+The below code first extracts the tag form the url, if any, and then applies a class based on it.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ $url := .Destination | safeURL }}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>{{ $class := &#34;&#34; }}
