@@ -14,7 +14,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.18e31153481b80ce597cc75c06fec2f050f09642b99434a866a2cc705c69e995.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.8aa42cba1a6871435cd923b60c887f31ed3d8de5d19b23747ff0cb9ab201bd45.css" media="all">
 
 
 
@@ -146,8 +146,19 @@
 
 
 
+
+
 <figure class="">
-    <img loading="lazy" alt="img" src=" problem.webp">
+
+    <div>
+        <img loading="lazy" alt="img" src=" problem.webp">
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> PNGs on light and dark mode </figcaption>
+    </div>
+    
 </figure></p>
 <p>I wanted a quick way to define light and dark mode images for Hugo.</p>
 <h2 id="solution">Solution</h2>
@@ -161,25 +172,33 @@
 <h2 id="code">Code</h2>
 <p>Hugo renders images with the logic defined in:</p>
 <pre tabindex="0"><code>/layouts/_default/_markup/render-image.html
-</code></pre><p>We can override it and decide which class to apply to an image based on the final tag.
-The below code first extracts the tag form the url, if any, and then applies a class based on it.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ $url := .Destination | safeURL }}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{ $class := &#34;&#34; }}
+</code></pre><p>We can override it and decide which class to apply to an image based on image tags.
+I generalized the idea of tags and used them to pick image sizing as well, introducing the following:</p>
+<pre tabindex="0"><code>#dark, #light, #small, #full
+</code></pre><p>The below code first extracts the tags form the url, if any, and then applies classes to the figure based on them.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{/* Split URL at # */}}
+</span></span><span style="display:flex;"><span>{{ $url := .Destination | safeURL }}
 </span></span><span style="display:flex;"><span>{{ $file_name_array := split $url &#34;#&#34; }}
-</span></span><span style="display:flex;"><span>{{ $file_name_len := len $file_name_array }}
-</span></span><span style="display:flex;"><span>{{ $tag := index $file_name_array (sub $file_name_len 1)}}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{ if eq $tag &#34;dark&#34; }}
-</span></span><span style="display:flex;"><span>  {{ $class = &#34;img-dark&#34; }}
-</span></span><span style="display:flex;"><span>{{ else if eq $tag &#34;light&#34; }}
-</span></span><span style="display:flex;"><span>  {{ $class = &#34;img-light&#34; }}
-</span></span><span style="display:flex;"><span>{{end }}
+</span></span><span style="display:flex;"><span>{{/*
+</span></span><span style="display:flex;"><span>Iterate over all tags, which are in pos 1 to len array - 1,
+</span></span><span style="display:flex;"><span>and build the img class string as &#34;img-tag1 img-tag2 ...&#34;
+</span></span><span style="display:flex;"><span>*/}}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>&lt;<span style="font-weight:bold">figure</span> class=<span style="font-style:italic">&#34;{{ $class }}&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="font-weight:bold">img</span> loading=<span style="font-style:italic">&#34;lazy&#34;</span> alt=<span style="font-style:italic">&#34;{{ .Text }}&#34;</span> src=<span style="font-style:italic">&#34; {{ $url }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>{{ $classes := &#34;&#34; }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{ range $idx := seq (sub (len $file_name_array) 1) }}
+</span></span><span style="display:flex;"><span>{{ $tag := index $file_name_array $idx }}
+</span></span><span style="display:flex;"><span>{{ $classes = printf &#34;%s img-%s&#34; $classes $tag}}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{/* Use the computed classes on the rendered figure */}}
+</span></span><span style="display:flex;"><span>&lt;<span style="font-weight:bold">figure</span> class=<span style="font-style:italic">&#34;{{ $classes }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="font-weight:bold">img</span> loading=<span style="font-style:italic">&#34;lazy&#34;</span> alt=<span style="font-style:italic">&#34;{{ .Text }}&#34;</span> src=<span style="font-style:italic">&#34; {{ $url }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="font-weight:bold">div</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;/<span style="font-weight:bold">figure</span>&gt;
-</span></span></code></pre></div><p>Finally, we need to define two image classes in our CSS as follows:</p>
+</span></span></code></pre></div><p>Finally, we need to define image classes in our CSS as follows:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>.<span style="font-weight:bold">dark</span> .<span style="font-weight:bold">img-light</span> {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold">display</span>: <span style="font-weight:bold">none</span> <span style="">!important</span>;
 </span></span><span style="display:flex;"><span>}
@@ -187,7 +206,28 @@ The below code first extracts the tag form the url, if any, and then applies a c
 </span></span><span style="display:flex;"><span>.<span style="font-weight:bold">light</span> .<span style="font-weight:bold">img-dark</span> {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold">display</span>: <span style="font-weight:bold">none</span> <span style="">!important</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Where dark and light classes define color schemes.</p>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="font-weight:bold">img-small</span> <span style="font-weight:bold">div</span> {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">display</span>: <span style="font-weight:bold">flex</span>;
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">align-items</span>: <span style="font-weight:bold">center</span>;
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">justify-content</span>: <span style="font-weight:bold">center</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="font-weight:bold">img-small</span> <span style="font-weight:bold">img</span> {
+</span></span><span style="display:flex;"><span>  scale: 80<span style="">%</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="font-weight:bold">img-full</span> <span style="font-weight:bold">div</span> {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">display</span>: <span style="font-weight:bold">flex</span>;
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">align-items</span>: <span style="font-weight:bold">center</span>;
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">justify-content</span>: <span style="font-weight:bold">center</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="font-weight:bold">img-full</span> <span style="font-weight:bold">img</span> {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">width</span>: 100<span style="">vw</span> <span style="">!important</span>;
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">max-width</span>: 100<span style="">vw</span> <span style="">!important</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Where dark and light classes define color schemes and are added dynamically to the body.</p>
 <p>This solution is currently implemented in the <a href="https://github.com/tomfran/typo">Typo theme</a>, which is in use on this website, go have a look!</p>
 <p>I hope this was useful, thank you for reading!</p>
 
