@@ -8,7 +8,7 @@
 
 <title>
     
-    Hugo Dark and Light mode images | Francesco Tomaselli
+    Controlling Images with tags in Hugo | Francesco Tomaselli
     
 </title>
 
@@ -83,7 +83,7 @@
     <a href="/posts/">Posts</a>
     <span class="breadcrumbs-separator"> > </span>
     
-    <a class="breadcrumbs-current" href="/posts/light-dark-img/">Hugo Dark and Light mode images</a>
+    <a class="breadcrumbs-current" href="/posts/hugo-images/">Controlling Images with tags in Hugo</a>
 </div>
 
 
@@ -93,9 +93,9 @@
 
     
 
-    <h1 class="single-title">Hugo Dark and Light mode images</h1>
+    <h1 class="single-title">Controlling Images with tags in Hugo</h1>
     
-    <p class="single-summary">Auto-switch images based on theme.</p>
+    <p class="single-summary">Auto-switch images based on theme and specify sizing.</p>
     
 
     
@@ -160,22 +160,20 @@
     </div>
     
 </figure></p>
-<p>I wanted a quick way to define light and dark mode images for Hugo.</p>
+<p>I wanted a quick way to define light and dark mode images for Hugo. Also, controlling image size easily would be great too.</p>
 <h2 id="solution">Solution</h2>
 <p>GitHub lets users specify in which theme they want readme images with two tags:</p>
 <pre tabindex="0"><code>![img](./dark.png#gh-dark-mode-only)
 ![img](./light.png#gh-light-mode-only)
-</code></pre><p>I decided to do something similar, definining two tags, <code>#dark</code>, and <code>#light</code>.</p>
-<pre tabindex="0"><code>![img](./dark.png#dark)
-![img](./light.png#light)
+</code></pre><p>I decided to do something similar, definining several tags, <code>#dark</code>, <code>#light</code>, <code>#small</code>, <code>#full</code>, which controls on which theme an image appears, as well as sizing.</p>
+<pre tabindex="0"><code>![img](./dark.png#dark#small)
+![img](./light.png#light#full)
 </code></pre><p>What’s left is to tweak the hugo image render function to accomplish this.</p>
 <h2 id="code">Code</h2>
 <p>Hugo renders images with the logic defined in:</p>
 <pre tabindex="0"><code>/layouts/_default/_markup/render-image.html
 </code></pre><p>We can override it and decide which class to apply to an image based on image tags.
-I generalized the idea of tags and used them to pick image sizing as well, introducing the following:</p>
-<pre tabindex="0"><code>#dark, #light, #small, #full
-</code></pre><p>The below code first extracts the tags form the url, if any, and then applies classes to the figure based on them.</p>
+The below code first extracts the tags form the url, if any, and then applies classes to the figure based on them.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{/* Split URL at # */}}
 </span></span><span style="display:flex;"><span>{{ $url := .Destination | safeURL }}
 </span></span><span style="display:flex;"><span>{{ $file_name_array := split $url &#34;#&#34; }}
